@@ -1,18 +1,20 @@
 import React from 'react';
 import './App.css';
-import { Button } from 'antd';
-import MaskedInput from 'react-text-mask';
+import AnotherComponent from './AnotherComponent';
+import HOCFetchData from './HOCFetchData'
+import { withRouter } from 'react-router-dom'
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       number: 0,
-      numberMultiply : 0
+      numberMultiply: 0,
+      mydata: []
     }
   }
 
-  handlerDecrement = () =>{
+  handlerDecrement = () => {
     this.setState({
       number: this.state.number - 1
     })
@@ -26,7 +28,7 @@ class App extends React.Component {
 
   haldleChange = (e) => {
     this.setState({
-      numberMultiply : e.target.value
+      numberMultiply: e.target.value
     })
   }
 
@@ -36,32 +38,23 @@ class App extends React.Component {
     })
   }
 
-  render(){
-  const { number } = this.state;
-  return (
-    <div className="App">
-       <Button style = {{marginRight : 10}}onClick={this.handlerInrement} className="coba" type="primary">
-         Tambah
-       </Button>
-       <Button onClick={this.handlerDecrement} className="coba" type="primary">
-         Kurang
-       </Button>
-       <br/>
-      <MaskedInput
-        mask={[ /[1-9]/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
-        guide={false}
-        style = {{width : 200, marginRight : 5}}
-        onChange={this.haldleChange}
-        placeholder = "Masukan Angka"
+  render() {
+    console.log('HOC Props', this.props)
+    const { number } = this.state;
+    const { dataFetch } = this.props;
+    return (
+      <div className="App">
+        <AnotherComponent
+          handlerInrement={this.handlerInrement}
+          handlerDecrement={this.handlerDecrement}
+          number={number}
+          handlerFatchUser={this.handlerFatchUser}
+          mydata={dataFetch}
         />
-       <Button style = {{marginTop : 5}}onClick={this.hendlerKali} className="coba" type="primary">
-         Kali
-       </Button>
-       <br/>
-       {number}
-    </div>
-  );
-}
+
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(HOCFetchData(App));
