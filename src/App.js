@@ -48,10 +48,12 @@ class App extends React.Component {
        </Button>
        <br/>
       <MaskedInput
-        mask={[ /[1-9]/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+        mask={[ /[1-9]/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
         guide={false}
-        style = {{width : 100, marginRight : 5}}
-        onChange={this.haldleChange}/>
+        style = {{width : 200, marginRight : 5}}
+        onChange={this.haldleChange}
+        placeholder = "Masukan Angka"
+        />
        <Button style = {{marginTop : 5}}onClick={this.hendlerKali} className="coba" type="primary">
          Kali
        </Button>
